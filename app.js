@@ -22,6 +22,23 @@ app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
+app.post('/reverseGeocode', (req, res) => {
+   console.log(req.body.long)
+   console.log(req.body.lat)
+   
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${req.body.lat}&lon=${req.body.long}&zoom=18&addressdetails=1`)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      res.send({
+          data
+      })
+    })
+
+   
+})
+
+
 app.get('/getVirus', (req,res)=>{
    
     fetch(`${process.env.APIURI}`)
