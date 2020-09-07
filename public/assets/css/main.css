@@ -1970,6 +1970,7 @@ input, select, textarea {
 			box-shadow: none;
 			background-color: #4696e5;
 			color: #ffffff !important;
+			margin-right: 5px;
 		}
 
 			input[type="submit"].primary:hover,
