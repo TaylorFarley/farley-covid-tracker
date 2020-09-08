@@ -45,7 +45,7 @@ selectElement.addEventListener('change', (event) => {
 
 
 
-
+//location services
 
 document.querySelector('#buttonMe').addEventListener('click', () => {
     fetch(`/getVirus`)
@@ -57,7 +57,8 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition);
           } else { 
-            x.innerHTML = "Geolocation is not supported by this browser.";
+            document.querySelector('#displayStats').innerHTML="Geolocation is not supported by this browser."
+          
           }
           function showPosition(position) {
            console.log(position.coords.latitude)
