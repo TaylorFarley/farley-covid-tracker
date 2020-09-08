@@ -32,6 +32,7 @@ body {
 	line-height: 1;
 }
 
+
 ol, ul {
 	list-style: none;
 }
@@ -3677,6 +3678,7 @@ input, select, textarea {
 			color: #ffffff;
 		}
 
+
 		#header input[type="text"],
 		#header input[type="password"],
 		#header input[type="email"],
@@ -4151,3 +4153,6 @@ input, select, textarea {
 		}
 
 	}
+	#loading {
+		display:none
+	  }
