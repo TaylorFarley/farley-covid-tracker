@@ -9,8 +9,17 @@ let displayData = [];
 const selectElement = document.querySelector('#selectProv');
 
 selectElement.addEventListener('change', (event) => {
+           
+    window.scrollTo({
+        top: 500,
+        left: 100,
+        behavior: 'smooth'
+      });
   const selectedProv = event.target.value
   console.log(selectedProv)
+
+  document.querySelector('#displayStats').innerHTML='Loading..' 
+
   fetch(`/getVirus`)
     .then((response) => response.json())
     .then((data) => {
@@ -22,11 +31,7 @@ selectElement.addEventListener('change', (event) => {
                     let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")        
                     let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + selectedProv 
                     document.querySelector('#displayStats').innerHTML=output                         
-                    window.scrollTo({
-                        top: 500,
-                        left: 100,
-                        behavior: 'smooth'
-                      });
+                
        
                 })
         })
@@ -56,8 +61,7 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
         left: 100,
         behavior: 'smooth'
       });
-    var el = document.querySelector('#loading');
-    el.style.display = 'inline-block';
+      document.querySelector('#displayStats').innerHTML='Loading...' 
     navigator.geolocation.getCurrentPosition((position) => {
         //store those lat and long in here
         let lat = position.coords.latitude
@@ -85,6 +89,7 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
                     let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")        
        
                     let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + provFound  
+                   
                     document.querySelector('#displayStats').innerHTML=output
                     
             })
