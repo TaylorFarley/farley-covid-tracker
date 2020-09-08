@@ -47,63 +47,48 @@ selectElement.addEventListener('change', (event) => {
 
 //location services
 
-document.querySelector('#buttonMe').addEventListener('click', () => {
-    fetch(`/getVirus`)
-    .then((response) => response.json())
-    .then((data) => {
+//NEW FUNCTION TO REWRITE
 
-        covidData = data.data;
-        displayData = covidData.filter(data => data["Province"] === 'Ontario');
-        //geolocation
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-          } else { 
-            document.querySelector('#displayStats').innerHTML="Geolocation is not supported by this browser."
-          
-          }
-          function showPosition(position) {
-           console.log(position.coords.latitude)
-           
-                fetch('/reverseGeocode', {
-                    method: 'post',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                    long: position.coords.longitude,
-                    lat: position.coords.latitude
-                    })
-                }).then((response) => response.json())
-                .then((data) => {
-                    console.log(data.data.address.state)
-                    let n1 = (displayData[displayData.length-1].Cases - displayData[displayData.length-2].Cases)
+
+document.querySelector('#buttonMe').addEventListener('click', () => {
+    //need to start the location kick off below on 69
+    navigator.geolocation.getCurrentPosition((position) => {
+        //store those lat and long in here
+        let lat = position.coords.latitude
+        let long = position.coords.longitude
+
+        fetch('/reverseGeocode', {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+            long: position.coords.longitude,
+            lat: position.coords.latitude
+            })
+        }).then((response) => response.json())
+        .then((data) => {
+            console.log(data.data.address.state)
+            let provFound = data.data.address.state
+
+            fetch(`/getVirus`)
+            .then((response) => response.json())
+            .then((data) => {
+                covidData = data.data;
+                displayData = covidData.filter(data => data["Province"] === provFound);
+                console.log(displayData)
+                let n1 = (displayData[displayData.length-1].Cases - displayData[displayData.length-2].Cases)
                     let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")        
        
-                    let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + data.data.address.state  
+                    let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + provFound  
                     document.querySelector('#displayStats').innerHTML=output
                     window.scrollTo({
                         top: 500,
                         left: 100,
                         behavior: 'smooth'
                       });
-       
-       
-       
-                })
-        }
-              
- 
-    })      
-});
-
-
-
-document.querySelector('#testLocation').addEventListener('click', () => {
-    //need to start the location kick off below on 69
-    navigator.geolocation.getCurrentPosition((position) => {
-        //store those lat and long in here
-        const lat = position.coords.latitude
-        const long = position.coords.longitude
-        //fetch to the node server with those paramaters passed in 
-            console.log(lat)
+            })
+            
+        })
+            
     })
 
 
