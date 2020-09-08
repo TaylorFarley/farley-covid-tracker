@@ -97,12 +97,15 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
 
 
 document.querySelector('#testLocation').addEventListener('click', () => {
-
+    //need to start the location kick off below on 69
     navigator.geolocation.getCurrentPosition((position) => {
         //store those lat and long in here
         const lat = position.coords.latitude
         const long = position.coords.longitude
-       console.log(lat)
+        //fetch to the node server with those paramaters passed in 
+            console.log(lat)
+    })
+
 
 })
-})
+
