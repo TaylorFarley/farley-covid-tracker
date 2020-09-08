@@ -1971,6 +1971,7 @@ input, select, textarea {
 			background-color: #4696e5;
 			color: #ffffff !important;
 			margin-right: 5px;
+			
 		}
 
 			input[type="submit"].primary:hover,
@@ -3669,6 +3670,7 @@ input, select, textarea {
 				box-shadow: none;
 				background-color: #ffffff;
 				color: #4696e5 !important;
+				margin-bottom: 5px;
 			}
 
 		#header label {
@@ -4019,6 +4021,7 @@ input, select, textarea {
 		body.is-mobile #header {
 			background-attachment: scroll, scroll;
 		}
+		
 
 		body.is-preload #header .content {
 			-moz-transform: translateX(2em);
