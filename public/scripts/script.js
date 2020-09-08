@@ -1,6 +1,52 @@
 let covidData = [];
 let displayData = [];
 
+
+
+
+
+
+const selectElement = document.querySelector('#selectProv');
+
+selectElement.addEventListener('change', (event) => {
+  const selectedProv = event.target.value
+  console.log(selectedProv)
+  fetch(`/getVirus`)
+    .then((response) => response.json())
+    .then((data) => {
+        covidData = data.data;
+        displayData = covidData.filter(data => data["Province"] === selectedProv);
+          
+         
+                    let n1 = (displayData[displayData.length-1].Cases - displayData[displayData.length-2].Cases)
+                    let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")        
+                    let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + selectedProv 
+                    document.querySelector('#displayStats').innerHTML=output                         
+                    window.scrollTo({
+                        top: 500,
+                        left: 100,
+                        behavior: 'smooth'
+                      });
+       
+                })
+        })
+              
+ 
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 document.querySelector('#buttonMe').addEventListener('click', () => {
     fetch(`/getVirus`)
     .then((response) => response.json())
@@ -28,23 +74,20 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
                     console.log(data.data.address.state)
                     let n1 = (displayData[displayData.length-1].Cases - displayData[displayData.length-2].Cases)
                     let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")        
-                    let output = Displaydate + ' Count is : ' + n1 + ' in ' + data.data.address.state 
+       
+                    let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases '+' in ' + data.data.address.state  
                     document.querySelector('#displayStats').innerHTML=output
-                          
+                    window.scrollTo({
+                        top: 500,
+                        left: 100,
+                        behavior: 'smooth'
+                      });
+       
        
        
                 })
         }
-        //endgeo
-
-
-
-       
-      
-       
-
-
-       
+              
  
     })      
 });
