@@ -51,6 +51,7 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
     fetch(`/getVirus`)
     .then((response) => response.json())
     .then((data) => {
+
         covidData = data.data;
         displayData = covidData.filter(data => data["Province"] === 'Ontario');
         //geolocation
@@ -93,3 +94,15 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
     })      
 });
 
+
+
+document.querySelector('#testLocation').addEventListener('click', () => {
+
+    navigator.geolocation.getCurrentPosition((position) => {
+        //store those lat and long in here
+        const lat = position.coords.latitude
+        const long = position.coords.longitude
+       console.log(lat)
+
+})
+})
