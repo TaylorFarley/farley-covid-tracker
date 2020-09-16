@@ -28,7 +28,7 @@ selectElement.addEventListener('change', (event) => {
 
 
             let n1 = (displayData[displayData.length - 1].Cases - displayData[displayData.length - 2].Cases)
-            let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")
+            let Displaydate = moment(displayData.Date).subtract(1, "day").format("YYYY-MM-DD")
             let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases ' + ' in ' + selectedProv
             document.querySelector('#displayStats').innerHTML = output
 
@@ -71,8 +71,8 @@ document.querySelector('#buttonMe').addEventListener('click', () => {
                         displayData = covidData.filter(data => data["Province"] === provFound);
                         console.log(displayData)
                         let n1 = (displayData[displayData.length - 1].Cases - displayData[displayData.length - 2].Cases)
-                        let Displaydate = moment(displayData.Date).format("YYYY-MM-DD")
-
+                        let Displaydate = moment(displayData.Date).subtract(1, "day").format("YYYY-MM-DD")
+                        
                         let output = 'On ' + Displaydate + ' there were ' + n1 + ' new cases ' + ' in ' + provFound
 
                         document.querySelector('#displayStats').innerHTML = output
